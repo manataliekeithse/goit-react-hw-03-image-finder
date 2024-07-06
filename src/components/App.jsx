@@ -3,7 +3,7 @@ import SearchBar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
-import { getAPI } from 'pixabay-api';
+import { getAPI } from '../pixabay-api';
 import styles from './App.module.css';
 import toast, { Toaster } from 'react-hot-toast';
 
