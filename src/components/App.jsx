@@ -20,7 +20,6 @@ class App extends Component {
   async componentDidUpdate(_prevProps, prevState) {
     const { searchQuery, currentPage } = this.state;
 
-    // Fetch new images if the search query or current page changes
     if (
       prevState.searchQuery !== searchQuery ||
       prevState.currentPage !== currentPage
@@ -41,7 +40,6 @@ class App extends Component {
 
       const { totalHits, hits } = response;
 
-      // Check if the API returns no images for the search query
       if (hits.length === 0) {
         toast.error(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -50,12 +48,10 @@ class App extends Component {
         return;
       }
 
-      // Display a success message when the first page is loaded
       if (currentPage === 1) {
         toast.success(`Hooray! We found ${totalHits} images!`);
       }
 
-      // Check if all available images have been loaded
       if (currentPage * 12 >= totalHits) {
         this.setState({ isEnd: true });
         toast("We're sorry, but you've reached the end of search results.", {
@@ -73,11 +69,9 @@ class App extends Component {
         isEnd: prevState.images.length + hits.length >= totalHits,
       }));
     } catch (error) {
-      // Handle any errors that occur during the API request
       this.setState({ isError: true });
       toast.error('Oops, something went wrong! Reload this page!');
     } finally {
-      // Ensure loading state is reset once the API request completes
       this.setState({ isLoading: false });
     }
   };
@@ -86,13 +80,11 @@ class App extends Component {
     const normalizedQuery = query.trim().toLowerCase();
     const normalizedCurrentQuery = this.state.searchQuery.toLowerCase();
 
-    // Validate the search query to prevent empty searches
     if (normalizedQuery === '') {
       alert(`Empty string is not a valid search query. Please type again.`);
       return;
     }
 
-    // Prevent duplicate searches with the same query
     if (normalizedQuery === normalizedCurrentQuery) {
       alert(
         `Search query is the same as the previous one. Please provide a new search query.`
@@ -100,7 +92,6 @@ class App extends Component {
       return;
     }
 
-    // Only update the state and fetch images if the new query is different
     if (normalizedQuery !== normalizedCurrentQuery) {
       this.setState({
         searchQuery: normalizedQuery,
@@ -112,7 +103,6 @@ class App extends Component {
   };
 
   handleLoadMore = () => {
-    // Increment the current page to load more images, unless at the end
     if (!this.state.isEnd) {
       this.setState(prevState => ({ currentPage: prevState.currentPage + 1 }));
     } else {

@@ -1,4 +1,3 @@
-/* ImageGalleryItem.module.css */
 .galleryItem {
   border-radius: 10px;
   overflow: hidden;
@@ -13,8 +12,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* This ensures the image covers the container without stretching */
-  object-position: center; /* This centers the image within the container */
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.3s ease;
   overflow: hidden;
 }
